@@ -21,5 +21,12 @@ namespace MyWebCI.Api.Controllers
             }
             return Ok(new ItemResponseDto() { Id = id, Name = "Item" + id });
         }
+
+
+        [HttpGet("category")]
+        public ActionResult<ItemResponseDto> GetCategory()
+        {
+            return Ok(new ItemResponseDto() { Id = 1, Name = "Categorym01" });
+        }
     }
 }
