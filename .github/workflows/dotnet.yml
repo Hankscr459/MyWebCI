@@ -3,9 +3,9 @@ name: .NET 10 CI
 # 定義觸發時機
 on:
   push:
-    branches: [ "main", "master" ] # 當代碼推送到 main 或 master 時觸發
+    branches: [ "main", "master", "dev" ] # 當代碼推送到 main 或 master 時觸發
   pull_request:
-    branches: [ "main", "master" ] # 當有 PR 針對這兩個分支時觸發
+    branches: [ "main", "master", "dev" ] # 當有 PR 針對這兩個分支時觸發
 
 jobs:
   build-and-test:
