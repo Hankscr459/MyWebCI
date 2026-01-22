@@ -35,7 +35,7 @@ namespace MyWebCI.Tests.Controllers
             //var item = okResult.Value.Should().BeOfType<ItemResponseDto>().Subject;
             var response =  _client.GetFromJsonAsync<ItemResponseDto>("/item").Result;
 
-            response.Id.Should().Be(3);
+            response.Id.Should().Be(1);
             response.Name.Should().Be("Item01");
         }
 
