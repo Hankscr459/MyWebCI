@@ -1,0 +1,35 @@
+name: .NET 10 CI
+
+# 定義觸發時機
+on:
+  push:
+    branches: [ "main", "master" ] # 當代碼推送到 main 或 master 時觸發
+  pull_request:
+    branches: [ "main", "master" ] # 當有 PR 針對這兩個分支時觸發
+
+jobs:
+  build-and-test:
+    # 使用最新的 Ubuntu 環境
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1. 檢出程式碼 (Checkout)
+      uses: actions/checkout@v4
+
+    - name: 2. 設定 .NET 10 環境
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x' # 自動安裝最新的 .NET 10 SDK
+
+    - name: 3. 還原 NuGet 套件 (Restore)
+      # 針對方案檔進行還原，這會處理 Api 與 Tests 兩個專案的依賴
+      run: dotnet restore MyWebCI.slnx
+
+    - name: 4. 編譯專案 (Build)
+      # 使用 Release 模式編譯，--no-restore 可加快速度
+      run: dotnet build MyWebCI.slnx --configuration Release --no-restore
+
+    - name: 5. 執行單元測試 (Test)
+      # 這會掃描方案中所有的測試專案並執行
+      # --verbosity normal 會顯示每個測試方法的通過情況
+      run: dotnet test MyWebCI.slnx --configuration Release --no-build --verbosity normal
