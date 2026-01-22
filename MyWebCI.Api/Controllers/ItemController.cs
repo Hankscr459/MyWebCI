@@ -1,0 +1,25 @@
+using Microsoft.AspNetCore.Mvc;
+using MyWebCI.Api.Dto.Response;
+
+namespace MyWebCI.Api.Controllers
+{
+    [Route("[controller]")]
+    public class ItemController : BaseApiController
+    {
+        [HttpGet]
+        public ActionResult<ItemResponseDto> Get()
+        {
+            return Ok(new ItemResponseDto() { Id = 1, Name = "Item01" });
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<ItemResponseDto> GetById(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid ID");
+            }
+            return Ok(new ItemResponseDto() { Id = id, Name = "Item" + id });
+        }
+    }
+}

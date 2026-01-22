@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MyWebCI.Api/MyWebCI.Api.csproj" />
+  <Project Path="MyWebCI.Tests/MyWebCI.Tests.csproj" Id="841bf5a2-ac26-4473-88d9-a1918f32cfb0" />
+</Solution>
