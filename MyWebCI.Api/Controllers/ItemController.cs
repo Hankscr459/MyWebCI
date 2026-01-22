@@ -4,12 +4,12 @@ using MyWebCI.Api.Dto.Response;
 namespace MyWebCI.Api.Controllers
 {
     [Route("[controller]")]
-    public class ItemController : BaseApiController
+    public class ItemController(IConfiguration config) : BaseApiController
     {
         [HttpGet]
         public ActionResult<ItemResponseDto> Get()
         {
-            return Ok(new ItemResponseDto() { Id = 1, Name = "Item01" });
+            return Ok(new ItemResponseDto() { Id = int.Parse(config["ProductId"]), Name = "Item01" });
         }
 
         [HttpGet("{id}")]
@@ -27,6 +27,12 @@ namespace MyWebCI.Api.Controllers
         public ActionResult<ItemResponseDto> GetCategory()
         {
             return Ok(new ItemResponseDto() { Id = 1, Name = "Categorym01" });
+        }
+
+        [HttpGet("category/{id}")]
+        public ActionResult<ItemResponseDto> GetCategoryById(int id)
+        {
+            return Ok(new ItemResponseDto() { Id = id, Name = "Categorym" + id });
         }
     }
 }

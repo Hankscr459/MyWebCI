@@ -3,9 +3,9 @@ name: .NET 10 CI
 # 定義觸發時機
 on:
   push:
-    branches: [ "main", "master" ] # 當代碼推送到 main 或 master 時觸發
+    branches: [ "main", "master", "dev" ] # 當代碼推送到 main 或 master 時觸發
   pull_request:
-    branches: [ "main", "master" ] # 當有 PR 針對這兩個分支時觸發
+    branches: [ "main", "master", "dev" ] # 當有 PR 針對這兩個分支時觸發
 
 jobs:
   build-and-test:
@@ -33,3 +33,5 @@ jobs:
       # 這會掃描方案中所有的測試專案並執行
       # --verbosity normal 會顯示每個測試方法的通過情況
       run: dotnet test MyWebCI.slnx --configuration Release --no-build --verbosity normal
+      env:
+        ProductId: ${{ secrets.ProductId }}
